@@ -4,15 +4,15 @@ public interface MyList<T> {
 
     void add(T value);
 
-    T get(int position);
+    T get(int position) throws EmptyListException;
 
     boolean contains(T value);
 
-    void remove(T value);
+    void remove(T value) throws EmptyListException;
 
     int size();
 
-    Node<T> getFirst();
+    T getFirst();
 
     boolean isEmpty();
 }

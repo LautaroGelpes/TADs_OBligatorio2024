@@ -187,8 +187,8 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     }
 
     @Override
-    public Node<T> getFirst() {
-        return null;
+    public T getFirst() {
+        return this.first.getValue();
     }
 
     // Operaciones particulares a Queue
