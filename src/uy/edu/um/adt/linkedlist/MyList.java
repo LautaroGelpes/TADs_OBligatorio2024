@@ -1,5 +1,7 @@
 package uy.edu.um.adt.linkedlist;
 
+import uy.edu.um.adt.Exceptions.EmptyListException;
+
 public interface MyList<T> {
 
     void add(T value);

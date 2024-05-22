@@ -1,4 +1,4 @@
-package uy.edu.um.adt.stack;
+package uy.edu.um.adt.Exceptions;
 
 public class EmptyStackException extends Exception {
 }

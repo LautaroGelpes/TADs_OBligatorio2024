@@ -1,5 +1,5 @@
 package uy.edu.um.adt.doublelinkedlist;
-import uy.edu.um.adt.linkedlist.EmptyListException;
+import uy.edu.um.adt.Exceptions.EmptyListException;
 public class MyCircularLinkedListImpl<T> extends MyDoubleLinkedListImpl<T>{
 
 

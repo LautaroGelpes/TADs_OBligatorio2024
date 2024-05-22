@@ -1,4 +1,4 @@
-package uy.edu.um.adt.linkedlist;
+package uy.edu.um.adt.Exceptions;
 
 public class EmptyListException extends Exception{
     public EmptyListException() {

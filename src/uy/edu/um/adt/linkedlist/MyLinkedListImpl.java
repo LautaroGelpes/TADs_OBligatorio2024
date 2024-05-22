@@ -1,9 +1,9 @@
 package uy.edu.um.adt.linkedlist;
 
 
-import uy.edu.um.adt.queue.EmptyQueueException;
+import uy.edu.um.adt.Exceptions.EmptyQueueException;
 import uy.edu.um.adt.queue.MyQueue;
-import uy.edu.um.adt.stack.EmptyStackException;
+import uy.edu.um.adt.Exceptions.EmptyStackException;
 import uy.edu.um.adt.stack.MyStack;
 
 public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {

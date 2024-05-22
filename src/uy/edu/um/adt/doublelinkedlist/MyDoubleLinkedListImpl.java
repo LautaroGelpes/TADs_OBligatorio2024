@@ -1,7 +1,7 @@
 package uy.edu.um.adt.doublelinkedlist;
 
 import uy.edu.um.adt.linkedlist.MyList;
-import uy.edu.um.adt.linkedlist.EmptyListException;
+import uy.edu.um.adt.Exceptions.EmptyListException;
 
 public class MyDoubleLinkedListImpl<T> implements MyList<T> {
     private DNode<T> primero = null;
