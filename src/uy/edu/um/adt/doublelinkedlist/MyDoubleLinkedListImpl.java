@@ -1,7 +1,7 @@
 package uy.edu.um.adt.doublelinkedlist;
 
+import uy.edu.um.adt.Exceptions.InvalidValue;
 import uy.edu.um.adt.linkedlist.MyList;
-import uy.edu.um.adt.Exceptions.EmptyListException;
 
 public class MyDoubleLinkedListImpl<T> implements MyList<T> {
     private DNode<T> primero = null;
@@ -20,6 +20,8 @@ public class MyDoubleLinkedListImpl<T> implements MyList<T> {
         }
         return size;
     }
+
+
     protected DNode<T> getPrimero(){
         return primero;
     }
@@ -51,12 +53,9 @@ public class MyDoubleLinkedListImpl<T> implements MyList<T> {
     private DNode<T> DNodeP(T nodo, DNode<T> prev){
         return new DNode<T>(nodo,prev,null);
     }
-    protected DNode<T> getNodo(int index) throws EmptyListException, IndexOutOfBoundsException {
+    protected DNode<T> getNodo(int index) throws InvalidValue {
         if (index >= size() || index < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        if (isEmpty()){
-            throw new EmptyListException();
+            throw new InvalidValue();
         }
         DNode<T> aux = this.primero;
         for (int i = 0; i < index; i++) {
@@ -75,7 +74,7 @@ public class MyDoubleLinkedListImpl<T> implements MyList<T> {
                 if(this.get(i).equals(value)){
                     return true;
                 }
-            } catch (EmptyListException e) {
+            } catch (InvalidValue e) {
                 return false;
             }
         }
@@ -105,7 +104,7 @@ public class MyDoubleLinkedListImpl<T> implements MyList<T> {
     }
 
     @Override
-    public T get(int index) throws EmptyListException {
+    public T get(int index) throws InvalidValue {
         return this.getNodo(index).getValue();
     }
 
@@ -166,8 +165,10 @@ public class MyDoubleLinkedListImpl<T> implements MyList<T> {
                 s += i+". "+getNodo(i).getValue().toString()+"\n";
             }
         }
-        catch (EmptyListException e) {
-            s = "Lista vacía";
+        catch (InvalidValue e) {
+            if (isEmpty()){
+                s = "Lista vacía";
+            }
         }
         return s;
     }

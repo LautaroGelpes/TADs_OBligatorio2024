@@ -72,9 +72,14 @@ public class HashEncadenado<K,V> implements MyHashTable<K,V>{
         throw new InvalidValue();
     }
 
-    public void resize(int newSize){
+    public void resize(int newSize) throws InvalidValue{
+        if (newSize<1){
+            throw new InvalidValue();
+        }
+
         MyLinkedListImpl<ValueStash<K,V>>[] newHashTable = new MyLinkedListImpl[newSize];
         this.size = newSize;
+
         for (int i = 0; i < this.size; i++) {
             if (this.hashTable[i] != null) {
                 for (int j = 0; j < this.hashTable[i].size(); j++) {

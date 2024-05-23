@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import uy.edu.um.adt.Exceptions.EmptyListException;
+import uy.edu.um.adt.Exceptions.InvalidValue;
 
 import static org.junit.Assert.*;
 
@@ -26,23 +27,31 @@ public class MyListTest {
     }
 
     @Test
-    public void getTest() throws EmptyListException {
+    public void getTest() throws EmptyListException, InvalidValue {
         Assert.assertEquals("value3",myList.get(2));
     }
-
-
+    @Test(expected = InvalidValue.class)
+    public void getInvalidValueTest1() throws EmptyListException, InvalidValue {
+        myList.get(-1);
+    }
+    @Test(expected = InvalidValue.class)
+    public void getInvalidValueTest2() throws EmptyListException, InvalidValue {
+        myList.get(6);
+    }
     @Test
     public void containsFalseTest() {
         Assert.assertFalse(myList.contains("value10"));
     }
 
     @Test
-    public void removeTest() throws EmptyListException {
+    public void removeTest() throws EmptyListException,InvalidValue {
         myList.remove("value4");
         Assert.assertFalse(myList.contains("value4"));
-
     }
-
+    @Test(expected = InvalidValue.class)
+    public void removeInvalidValueTest() throws EmptyListException,InvalidValue {
+        myList.remove("HelloWorld");
+    }
     @Test
     public void sizeTest() {
         Assert.assertEquals(5,myList.size());

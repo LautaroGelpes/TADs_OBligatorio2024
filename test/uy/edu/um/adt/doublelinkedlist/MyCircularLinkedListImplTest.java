@@ -1,4 +1,4 @@
-package uy.edu.um.adt.circularlist;
+package uy.edu.um.adt.doublelinkedlist;
 
 import org.junit.Test;
 

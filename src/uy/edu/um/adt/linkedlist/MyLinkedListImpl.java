@@ -3,6 +3,7 @@ package uy.edu.um.adt.linkedlist;
 
 import uy.edu.um.adt.Exceptions.EmptyListException;
 import uy.edu.um.adt.Exceptions.EmptyQueueException;
+import uy.edu.um.adt.Exceptions.InvalidValue;
 import uy.edu.um.adt.queue.MyQueue;
 import uy.edu.um.adt.Exceptions.EmptyStackException;
 import uy.edu.um.adt.stack.MyStack;
@@ -67,7 +68,11 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         }
     }
 
-    public T get(int position){
+    public T get(int position) throws InvalidValue {
+        if (position < 0 || position >= size()) {
+            throw new InvalidValue();
+        }
+
         T valueToReturn = null;
         int tempPosition = 0;
         Node<T> temp = this.first;
@@ -111,7 +116,7 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         return contains;
     }
 
-    public void remove(T value) {
+    public void remove(T value) throws InvalidValue {
         Node<T> beforeSearchValue = null;
         Node<T> searchValue = this.first;
 
@@ -154,7 +159,7 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
         } else {
 
-            // Si no es encuentra el valor a eliminar no se realiza nada
+            throw new InvalidValue();
 
         }
 
@@ -165,8 +170,12 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
         if (this.last != null) {
             valueToRemove = this.last.getValue();
+            try {
+                remove(valueToRemove);
+            } catch (InvalidValue e) {
+                System.out.println("Este mensaje nunca debería saltar."); //InvalidValue solo salta si no se encuentra el elemento, y en este caso se usa el this.last, que seguro está en la lista.
+            }
 
-            remove(valueToRemove);
         }
 
         return valueToRemove;

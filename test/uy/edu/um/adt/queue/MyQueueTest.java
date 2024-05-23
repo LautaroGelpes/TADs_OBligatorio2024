@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import uy.edu.um.adt.Exceptions.EmptyQueueException;
+import uy.edu.um.adt.Exceptions.InvalidValue;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 
 import static org.junit.Assert.*;
@@ -43,10 +44,17 @@ public class MyQueueTest {
     }
 
     @Test
-    public void getTest() {
+    public void getTest() throws InvalidValue {
         Assert.assertEquals("Value2",myQueue.get(3));
     }
-
+    @Test(expected = InvalidValue.class)
+    public void getInvalidValueTest1() throws InvalidValue {
+        myQueue.get(-1);
+    }
+    @Test(expected = InvalidValue.class)
+    public void getInvalidValueTest2() throws InvalidValue {
+        myQueue.get(6);
+    }
     @Test
     public void sizeTest() {
         Assert.assertEquals(5,myQueue.size());

@@ -1,6 +1,7 @@
 package uy.edu.um.adt.queue;
 
 import uy.edu.um.adt.Exceptions.EmptyQueueException;
+import uy.edu.um.adt.Exceptions.InvalidValue;
 
 public interface MyQueue<T> {
 
@@ -10,7 +11,7 @@ public interface MyQueue<T> {
 	
 	boolean contains(T value);
 
-	T get(int i);
+	T get(int i) throws InvalidValue;
 	
 	int size();
 
