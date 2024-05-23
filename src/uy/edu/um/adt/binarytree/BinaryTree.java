@@ -3,9 +3,6 @@
  */
 package uy.edu.um.adt.binarytree;
 
-import uy.edu.um.adt.Exceptions.AlreadyExistingValue;
-import uy.edu.um.adt.Exceptions.EmptyTree;
-
 import java.util.List;
 
 /**
@@ -14,13 +11,13 @@ import java.util.List;
  */
 public interface BinaryTree<T extends Comparable<T>> {
 
-	void add(T oElement) throws EmptyTree, AlreadyExistingValue;
+	void add(T oElement);
 
 	void remove(T oElement);
 
-	boolean contains(T oElement) throws EmptyTree;
+	boolean contains(T oElement);
 
-	T find(T oElement) throws EmptyTree;
+	T find(T oElement);
 	
 	List<T> preOrder();
 

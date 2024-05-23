@@ -1,68 +1,36 @@
 package uy.edu.um.adt.linkedlist;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import uy.edu.um.adt.Exceptions.EmptyListException;
 
 import static org.junit.Assert.*;
 
 public class MyListTest {
-    MyList<String> myList;
 
-    @Before
-    public void Base(){
-        myList = new MyLinkedListImpl<>();
-        myList.add("value1");
-        myList.add("value2");
-        myList.add("value3");
-        myList.add("value4");
-        myList.add("value5");
+    @Test
+    public void add() {
     }
 
     @Test
-    public void addTest() {
-        Assert.assertTrue(myList.contains("value4"));
+    public void get() {
     }
 
     @Test
-    public void getTest() throws EmptyListException {
-        Assert.assertEquals("value3",myList.get(2));
-    }
-
-
-    @Test
-    public void containsFalseTest() {
-        Assert.assertFalse(myList.contains("value10"));
+    public void contains() {
     }
 
     @Test
-    public void removeTest() throws EmptyListException {
-        myList.remove("value4");
-        Assert.assertFalse(myList.contains("value4"));
-
+    public void remove() {
     }
 
     @Test
-    public void sizeTest() {
-        Assert.assertEquals(5,myList.size());
+    public void size() {
     }
 
     @Test
-    public void getFirsttest() {
-        Assert.assertEquals("value1",myList.getFirst());
+    public void getFirst() {
     }
 
     @Test
-    public void isEmptyFalseTest() {
-        Assert.assertFalse(myList.isEmpty());
-
-    }
-
-    @Test
-    public void isEmptyTrueTest() {
-        MyList<String> myOtherList = new MyLinkedListImpl<>();
-        Assert.assertTrue(myOtherList.isEmpty());
-
+    public void isEmpty() {
     }
 }

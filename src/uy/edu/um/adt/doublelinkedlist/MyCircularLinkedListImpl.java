@@ -91,5 +91,31 @@ public class MyCircularLinkedListImpl<T> extends MyDoubleLinkedListImpl<T>{
     }
 
 
+    public static void main(String[] args) {
+        MyCircularLinkedListImpl<String> listaCircular = new MyCircularLinkedListImpl<String>();
+        listaCircular.add("Juan2");
+        listaCircular.add("Pedro3");
+        listaCircular.addFirst("Maria1");
+        listaCircular.add("Josefo4");
+        listaCircular.add("Willyrex5");
+        listaCircular.addFirst("Alfonso0");
+        System.out.println(listaCircular);
+
+
+        try {
+            listaCircular.remove("Willyrex5");
+            listaCircular.remove("Alfonso0");
+            listaCircular.remove("Pedro3");
+            System.out.println("Nuevo primer elemento: "+listaCircular.getNodo(0));
+            System.out.println("Se eliminaron los elementos 5 y 4");
+        }
+        catch (EmptyListException e) {
+            System.out.println("EmptyListException al eliminar de la lista circular");
+        }
+        System.out.println(listaCircular);
+
+
+
+    }
 
 }

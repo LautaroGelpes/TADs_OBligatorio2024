@@ -6,12 +6,10 @@ public class HashTable<K,V> implements MyHashTable<K,V> {
 
     private ValueStash<K,V>[] stashes;   //Arreglar
     private int size;
-    private int count;
 
     public HashTable(){
         this.size = 11;
         this.stashes = new ValueStash[size];
-        this.count = 0;
     }
 
     private int hashFunction(K key){
@@ -23,16 +21,13 @@ public class HashTable<K,V> implements MyHashTable<K,V> {
             hashedKey = hashedKey + (int)aux;
         }
 
-        return hashedKey % size;
+        hashedKey = hashedKey % size;
+        return hashedKey;
     }
 
 
     @Override
     public void put(K key, V value) {
-        if(count == size){
-            resize(size*2);
-        }
-
         int index = hashFunction(key);
         ValueStash<K,V> nuevoObjeto = new ValueStash<>();
         nuevoObjeto.setKey(key);
@@ -45,7 +40,7 @@ public class HashTable<K,V> implements MyHashTable<K,V> {
         }
 
         stashes[index] = nuevoObjeto;
-        count++;
+        System.out.println(stashes[index].getValue() + " " + index); //Borrar
     }
 
     @Override
@@ -64,7 +59,6 @@ public class HashTable<K,V> implements MyHashTable<K,V> {
         Integer index = hashFunction(clave);
         if(clave.equals(stashes[index].getKey())){
            stashes[index] = null;
-           count--;
         }else{
             index = null;
             for (int i = 0; i < stashes.length; i++) {
@@ -76,7 +70,6 @@ public class HashTable<K,V> implements MyHashTable<K,V> {
                 throw new InvalidValue();
             }else{
                 stashes[index] = null;
-                count--;
             }
         }
     }
@@ -105,16 +98,7 @@ public class HashTable<K,V> implements MyHashTable<K,V> {
     }
 
     private void resize(int newSize){
-        ValueStash[] oldStashValues = stashes;
-        stashes = new ValueStash[newSize];
-        size = newSize;
-
-        for (ValueStash<K,V> oldstash : oldStashValues) {
-            if(oldstash != null){
-                put(oldstash.getKey(), oldstash.getValue());
-            }
-
-        }
+  //Hacer un nuevo array y rehashear todos los elementos.
     }
 
 

@@ -3,9 +3,6 @@
  */
 package uy.edu.um.adt.binarytree;
 
-import uy.edu.um.adt.Exceptions.AlreadyExistingValue;
-import uy.edu.um.adt.Exceptions.EmptyTree;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +11,12 @@ import java.util.List;
  * @param <T>
  *
  */
-public class SearchBinaryTreeImpl<T extends Comparable<T>> implements BinaryTree<T> {
+public class SearchBinaryTreeImpl<T extends Comparable<T>> implements
+		BinaryTree<T> {
 
 	private TreeNode<T> root;
 
-	public SearchBinaryTreeImpl(){
-		this.root = null;
-	}
-
-	public void add(T oElement) throws EmptyTree, AlreadyExistingValue {
+	public void add(T oElement) {
 		TreeNode<T> oElementToAdd = new TreeNode<T>(oElement);
 
 		if (root == null) {
@@ -30,20 +24,15 @@ public class SearchBinaryTreeImpl<T extends Comparable<T>> implements BinaryTree
 			root = oElementToAdd;
 
 		} else {
-			if(contains(oElement)){
-				throw new AlreadyExistingValue();
-			}else{
-				root.add(oElement);
-			}
+
+			root.add(oElement);
+
 		}
 	}
 
-	public boolean contains(T oElement)throws EmptyTree {
-		if(root == null){
-			throw new EmptyTree();
-		}else{
-			return contains(oElement, root);
-		}
+	public boolean contains(T oElement) {
+
+		return contains(oElement, root);
 	}
 
 	private boolean contains(T oElementToSearch, TreeNode<T> oTree) {
@@ -68,6 +57,7 @@ public class SearchBinaryTreeImpl<T extends Comparable<T>> implements BinaryTree
 			}
 
 		}
+
 		return bContains;
 	}
 
@@ -81,12 +71,9 @@ public class SearchBinaryTreeImpl<T extends Comparable<T>> implements BinaryTree
 
 	}
 	
-	public T find(T oElement) throws EmptyTree{
-		if(root == null){
-			throw new EmptyTree();
-		}else {
-			return find(oElement, root);
-		}
+	public T find(T oElement) {
+
+		return find(oElement, root);
 	}
 	
 	private T find(T oElementToSearch, TreeNode<T> oTree) {
