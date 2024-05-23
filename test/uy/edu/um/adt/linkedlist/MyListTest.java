@@ -31,11 +31,11 @@ public class MyListTest {
         Assert.assertEquals("value3",myList.get(2));
     }
     @Test(expected = InvalidValue.class)
-    public void getInvalidValueTest1() throws EmptyListException, InvalidValue {
+    public void getInvalidValueTest1() throws InvalidValue {
         myList.get(-1);
     }
     @Test(expected = InvalidValue.class)
-    public void getInvalidValueTest2() throws EmptyListException, InvalidValue {
+    public void getInvalidValueTest2() throws InvalidValue {
         myList.get(6);
     }
     @Test
@@ -44,12 +44,12 @@ public class MyListTest {
     }
 
     @Test
-    public void removeTest() throws EmptyListException,InvalidValue {
+    public void removeTest() throws InvalidValue {
         myList.remove("value4");
         Assert.assertFalse(myList.contains("value4"));
     }
     @Test(expected = InvalidValue.class)
-    public void removeInvalidValueTest() throws EmptyListException,InvalidValue {
+    public void removeInvalidValueTest() throws InvalidValue {
         myList.remove("HelloWorld");
     }
     @Test

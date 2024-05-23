@@ -1,6 +1,26 @@
 package uy.edu.um.adt.doublelinkedlist;
 import uy.edu.um.adt.Exceptions.EmptyListException;
+import uy.edu.um.adt.Exceptions.InvalidValue;
+
 public class MyCircularLinkedListImpl<T> extends MyDoubleLinkedListImpl<T>{
+
+
+    @Override
+    public int size() {
+        int size = 0;
+        if (this.getPrimero() == null){
+
+        }
+        else {
+            size++;
+            DNode<T> aux = this.getPrimero();
+            while (aux.getNext() != this.getPrimero()){
+                aux=aux.getNext();
+                size++;
+            }
+        }
+        return size;
+    }
 
 
     @Override
@@ -34,7 +54,7 @@ public class MyCircularLinkedListImpl<T> extends MyDoubleLinkedListImpl<T>{
     }
 
     @Override
-    public void remove(T value) {
+    public void remove(T value) throws InvalidValue {
         DNode<T> searchValue = this.getPrimero();
 
 
@@ -84,7 +104,7 @@ public class MyCircularLinkedListImpl<T> extends MyDoubleLinkedListImpl<T>{
         }
         else {
 
-            // Si no está el valor a eliminar no se realiza nada
+            throw new InvalidValue();
 
         }
 

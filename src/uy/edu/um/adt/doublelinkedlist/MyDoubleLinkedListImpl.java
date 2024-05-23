@@ -12,6 +12,7 @@ public class MyDoubleLinkedListImpl<T> implements MyList<T> {
 
         }
         else {
+            size++;
             DNode<T> aux = this.primero;
             while (aux.getNext() != null){
                 aux=aux.getNext();
@@ -109,7 +110,7 @@ public class MyDoubleLinkedListImpl<T> implements MyList<T> {
     }
 
     @Override
-    public void remove(T value) {
+    public void remove(T value) throws InvalidValue{
         DNode<T> searchValue = this.primero;
 
         // Busco el elemento a eliminar
@@ -152,7 +153,7 @@ public class MyDoubleLinkedListImpl<T> implements MyList<T> {
 
         } else {
 
-            // Si no es encuentra el valor a eliminar no se realiza nada
+            throw new InvalidValue();
 
         }
 
