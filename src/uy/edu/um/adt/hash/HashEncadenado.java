@@ -2,33 +2,42 @@ package uy.edu.um.adt.hash;
 
 import uy.edu.um.adt.Exceptions.InvalidValue;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
+import uy.edu.um.adt.linkedlist.MyList;
+
 public class HashEncadenado<K,V> implements MyHashTable<K,V>{
-    private MyLinkedListImpl<ValueStash<K,V>>[] hashTable;
+    private MyList<ValueStash<K,V>>[] hashTable;
     private int size;
+
+    public int getSize() {
+        return size;
+    }
 
     public HashEncadenado() {
         this.size = 11;
-        this.hashTable = new MyLinkedListImpl[size];
+        this.hashTable = new MyList[size];
     }
 
     public HashEncadenado(int size) {
         this.size = size;
-        this.hashTable = new MyLinkedListImpl[size];
+        this.hashTable = new MyList[size];
     }
 
     //metodo auxiliar para encontrar el stash directo en vez del valor
-    private ValueStash<K,V> findStash(K key) throws InvalidValue {
-        if (hashTable[hashFunction(key)] != null) {         //si hay un elemento en la posición correspondiente
-            MyLinkedListImpl<ValueStash<K, V>> listaColisiones = hashTable[hashFunction(key)];  //me guardo la linked list que contendría el valor
+    private ValueStash<K, V> findStash(K key) throws InvalidValue {
+        int hash = hashFunction(key);
+        MyList<ValueStash<K, V>> listaColisiones = hashTable[hash];
+
+        if (listaColisiones != null) {
             for (int i = 0; i < listaColisiones.size(); i++) {
-                if (listaColisiones.get(i).getKey().equals(key)) {      //busco en la linked list
-                    return listaColisiones.get(i);           //si lo encuentro, retorno el valor
+                ValueStash<K, V> stash = listaColisiones.get(i);
+                if (stash.getKey().equals(key)) {
+                    return stash;
                 }
             }
-        }//si no se encuentra o si la posición no tenía nada
+        }
         throw new InvalidValue();
     }
-    private int hashFunction(K key){
+    public int hashFunction(K key){
         String sKey = key.toString();
         int hashedKey = 0;
         for (int i = 0; i < sKey.length(); i++) {
@@ -43,6 +52,10 @@ public class HashEncadenado<K,V> implements MyHashTable<K,V>{
         ValueStash<K,V> stash = new ValueStash<>();
         stash.setKey(key);
         stash.setValue(value);
+        if (hashTable[hashFunction(key)] == null) {
+            MyList<ValueStash<K, V>> lista = new MyLinkedListImpl<>();
+            hashTable[hashFunction(key)] = lista;
+        }
         hashTable[hashFunction(key)].add(stash);
     }
     public V find(K key) throws InvalidValue {
@@ -68,22 +81,28 @@ public class HashEncadenado<K,V> implements MyHashTable<K,V>{
             aux.setKey(clave); //creo un ValueStash para comparar, (el .equals() solo ve la key)
             hashTable[hashFunction(clave)].remove(aux); //uso el método de las LinkedList
         }
-        //no hay elementos en la posición
-        throw new InvalidValue();
+        else {    //no hay elementos en la posición
+            throw new InvalidValue();
+        }
     }
 
-    public void resize(int newSize) throws InvalidValue{
+    public void resize(int newSize) throws InvalidValue {
         if (newSize<1){
             throw new InvalidValue();
         }
 
-        MyLinkedListImpl<ValueStash<K,V>>[] newHashTable = new MyLinkedListImpl[newSize];
+        MyList<ValueStash<K,V>>[] newHashTable = new MyList[newSize];
+        int oldsize = this.size;
         this.size = newSize;
 
-        for (int i = 0; i < this.size; i++) {
+        for (int i = 0; i < oldsize; i++) {
             if (this.hashTable[i] != null) {
                 for (int j = 0; j < this.hashTable[i].size(); j++) {
-                    ValueStash<K,V> aux = this.hashTable[i].get(j);
+                    ValueStash<K, V> aux = this.hashTable[i].get(j);
+                    if (newHashTable[hashFunction(aux.getKey())] == null){
+                        MyList<ValueStash<K, V>> lista = new MyLinkedListImpl<>();
+                        newHashTable[hashFunction(aux.getKey())] = lista;
+                    }
                     newHashTable[hashFunction(aux.getKey())].add(aux);
                 }
             }
