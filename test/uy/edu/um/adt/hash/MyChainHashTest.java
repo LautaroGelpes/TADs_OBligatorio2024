@@ -6,11 +6,11 @@ import org.junit.Test;
 import uy.edu.um.adt.Exceptions.InvalidValue;
 
 public class MyChainHashTest {
-    private HashEncadenado<Object,Object> myHash;
+    private MyChainedHashImpl<Object,Object> myHash;
 
     @Before
     public void Base(){
-        myHash = new HashEncadenado<>();
+        myHash = new MyChainedHashImpl<>();
         myHash.put(1,"value1");
         myHash.put(2,"value2");
         myHash.put(3,"value3");

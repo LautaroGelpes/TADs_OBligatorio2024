@@ -5,12 +5,12 @@ import org.junit.Before;
 import org.junit.Test;
 import uy.edu.um.adt.Exceptions.InvalidValue;
 
-public class MyHashTableTest {
-    private HashTable<Object,Object> myHash;
+public class MyMyClosedHashImplTest {
+    private MyClosedHashImpl<Object,Object> myHash;
 
     @Before
     public void Base(){
-        myHash = new HashTable<>();
+        myHash = new MyClosedHashImpl<>();
         myHash.put(1,"value1");
         myHash.put(2,"value2");
         myHash.put(3,"value3");

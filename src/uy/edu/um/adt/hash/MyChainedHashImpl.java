@@ -4,7 +4,7 @@ import uy.edu.um.adt.Exceptions.InvalidValue;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
 
-public class HashEncadenado<K,V> implements MyHashTable<K,V>{
+public class MyChainedHashImpl<K,V> implements MyHashTable<K,V>{
     private MyList<ValueStash<K,V>>[] hashTable;
     private int size;
 
@@ -12,12 +12,12 @@ public class HashEncadenado<K,V> implements MyHashTable<K,V>{
         return size;
     }
 
-    public HashEncadenado() {
+    public MyChainedHashImpl() {
         this.size = 11;
         this.hashTable = new MyList[size];
     }
 
-    public HashEncadenado(int size) {
+    public MyChainedHashImpl(int size) {
         this.size = size;
         this.hashTable = new MyList[size];
     }
@@ -58,6 +58,8 @@ public class HashEncadenado<K,V> implements MyHashTable<K,V>{
         }
         hashTable[hashFunction(key)].add(stash);
     }
+
+    @Override
     public V find(K key) throws InvalidValue {
         return findStash(key).getValue();
     }

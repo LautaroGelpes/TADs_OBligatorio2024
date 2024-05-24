@@ -2,13 +2,13 @@ package uy.edu.um.adt.hash;
 
 import uy.edu.um.adt.Exceptions.InvalidValue;
 
-public class HashTable<K,V> implements MyHashTable<K,V> {
+public class MyClosedHashImpl<K,V> implements MyHashTable<K,V> {
 
     private ValueStash<K,V>[] stashes;   //Arreglar
     private int size;
     private int count;
 
-    public HashTable(){
+    public MyClosedHashImpl(){
         this.size = 11;
         this.stashes = new ValueStash[size];
         this.count = 0;
@@ -83,7 +83,7 @@ public class HashTable<K,V> implements MyHashTable<K,V> {
 
 
 
-
+    @Override
     public V find(K clave) throws InvalidValue{
         Integer index = hashFunction(clave);
         if(clave.equals(stashes[index].getKey())){
